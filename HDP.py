@@ -52,7 +52,7 @@ ASY: Asymptomatic
 
 chest_pain_type = st.selectbox(
     'Select Type', # Keep the actual selectbox label short and clean
-    options=options_list
+    options=options_list)
 #chest_pain_type = st.selectbox('Chest Pain Type \n TA: Typical Angina \n ATA: Atypical Angina \n NAP: Non-Anginal Pain \n ASY: Asymptomatic)', options=categorical_cols['ChestPainType'])
 resting_ecg = st.selectbox('Resting ECG Results \n Normal: Normal \n ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV) \n LVH: showing probable or definite left ventricular hypertrophy by Estes criteria)', options=categorical_cols['RestingECG'])
 exercise_angina = st.selectbox('Exercise Induced Angina', options=categorical_cols['ExerciseAngina'])
