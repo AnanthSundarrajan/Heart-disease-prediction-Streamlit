@@ -24,7 +24,8 @@ model_features = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldp
 # 3. Streamlit App Layout
 st.set_page_config(layout="wide")
 st.set_page_config(page_title="Heart Disease Prediction App", layout='centered')
-st.title("Heart Disease Prediction <br> created by Ananth Sundarrajan")
+st.title("Heart Disease Prediction")
+st.subheader("created by Ananth Sundarrajan")
 st.write("Enter the patient's details to predict the likelihood of heart disease.")
 
 # Input fields for user data
