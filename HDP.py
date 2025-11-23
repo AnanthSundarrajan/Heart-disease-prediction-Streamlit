@@ -31,17 +31,27 @@ st.markdown("### Enter the patient's details to predict the likelihood of heart 
 st.subheader('Patient Information')
 
 # Numerical inputs
-age = st.slider('Age (in years)', 18, 100, 50)
-resting_bp = st.slider('Resting Systolic Blood Pressure (mmHg)', 80, 200, 120)
-cholesterol = st.slider('Cholesterol (mg/dl)', 100, 600, 200)
-fasting_bs = st.selectbox('Is "Fasting Blood Sugar" GREATER THAN 120 mg/dl', options=[0, 1], format_func=lambda x: 'Yes' if x == 1 else 'No')
-max_hr = st.slider('What is the "Maximum Heart Rate" Achieved', 60, 220, 150)
-oldpeak = st.slider('Oldpeak (ST depression induced by exercise relative to rest. This can be found on your ECG)', 0.0, 6.2, 1.0)
+age = st.slider('**What is your Age (in years)**', 18, 100, 50)
+resting_bp = st.slider('**What is your "Resting Systolic Blood Pressure" in mmHg**', 80, 200, 120)
+cholesterol = st.slider('**What is your cholesterol level in mg/dl**', 100, 600, 200)
+fasting_bs = st.selectbox('**Was your "Fasting Blood Sugar" GREATER THAN 120 mg/dl**', options=[0, 1], format_func=lambda x: 'Yes' if x == 1 else 'No')
+max_hr = st.slider('**What is the "Maximum Heart Rate" Achieved**', 60, 220, 150)
+st.markdown(
+    "**What is your Oldpeak score?**  \nThis is the ST depression induced by exercise relative to rest which can be found on your ECG"
+)
+
+oldpeak = st.slider(
+    'Enter score here:', 
+    0.0,
+    6.2,
+    1.0
+)
+#oldpeak = st.slider('** What is your Oldpeak score (ST depression induced by exercise relative to rest. This can be found on your ECG)', 0.0, 6.2, 1.0)
 
 # Categorical inputs
-sex = st.selectbox('Sex', options=categorical_cols['Sex'])
-options_list = ['TA', 'ATA', 'NAP', 'ASY']
+sex = st.selectbox('**Select your gender (M = Male / F= Female)**', options=categorical_cols['Sex'])
 
+options_list_chest = ['TA', 'ATA', 'NAP', 'ASY']
 st.markdown("""
 **Chest Pain Type**  
 TA: Typical Angina  
@@ -49,11 +59,21 @@ ATA: Atypical Angina
 NAP: Non-Anginal Pain  
 ASY: Asymptomatic
 """)
-
 chest_pain_type = st.selectbox(
-    'Select Type', # Keep the actual selectbox label short and clean
-    options=options_list)
+    'Select Type',
+    options=options_list_chest)
 #chest_pain_type = st.selectbox('Chest Pain Type \n TA: Typical Angina \n ATA: Atypical Angina \n NAP: Non-Anginal Pain \n ASY: Asymptomatic)', options=categorical_cols['ChestPainType'])
+
+options_list_ecg = ['Normal', 'LVH', 'ST']
+st.markdown("""
+**Resting ECG result**  
+Normal: Normal result  
+ST: Having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)  
+LVH: Showing probable or definite left ventricular hypertrophy by Estes criteria  
+""")
+ecg_type = st.selectbox(
+    'Select Type',
+    options=options_list_ecg)
 resting_ecg = st.selectbox('Resting ECG Results \n Normal: Normal \n ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV) \n LVH: showing probable or definite left ventricular hypertrophy by Estes criteria)', options=categorical_cols['RestingECG'])
 exercise_angina = st.selectbox('Exercise Induced Angina', options=categorical_cols['ExerciseAngina'])
 st_slope = st.selectbox('ST_Slope - the slope of the peak exercise ST segment \n Up: upsloping \n Flat: flat \n Down: downsloping)', options=categorical_cols['ST_Slope'])
