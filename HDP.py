@@ -25,8 +25,9 @@ model_features = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldp
 st.set_page_config(layout="wide")
 st.set_page_config(page_title="Heart Disease Prediction App", layout='centered')
 st.title("Heart Disease Prediction")
-st.subheader("created by Ananth Sundarrajan")
+st.subheader("Developed by Ananth Sundarrajan")
 st.write("Enter the patient's details to predict the likelihood of heart disease.")
+st.markdown("## Enter the patient's details to predict the likelihood of heart disease.")
 
 # Input fields for user data
 st.header('Patient Information')
