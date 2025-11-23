@@ -71,10 +71,10 @@ Normal: Normal result
 ST: Having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)  
 LVH: Showing probable or definite left ventricular hypertrophy by Estes criteria  
 """)
-ecg_type = st.selectbox(
+resting_ecg = st.selectbox(
     'Select Type',
     options=options_list_ecg)
-resting_ecg = st.selectbox('Resting ECG Results \n Normal: Normal \n ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV) \n LVH: showing probable or definite left ventricular hypertrophy by Estes criteria)', options=categorical_cols['RestingECG'])
+#resting_ecg = st.selectbox('Resting ECG Results \n Normal: Normal \n ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV) \n LVH: showing probable or definite left ventricular hypertrophy by Estes criteria)', options=categorical_cols['RestingECG'])
 exercise_angina = st.selectbox('Exercise Induced Angina', options=categorical_cols['ExerciseAngina'])
 st_slope = st.selectbox('ST_Slope - the slope of the peak exercise ST segment \n Up: upsloping \n Flat: flat \n Down: downsloping)', options=categorical_cols['ST_Slope'])
 
