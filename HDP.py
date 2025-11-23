@@ -25,10 +25,10 @@ model_features = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldp
 st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
 st.title("Heart Disease Prediction")
 st.subheader("Developed by Ananth Sundarrajan")
-st.markdown("## Enter the patient's details to predict the likelihood of heart disease.")
+st.markdown("### Enter the patient's details to predict the likelihood of heart disease.")
 
 # Input fields for user data
-st.header('Patient Information')
+st.subheader('Patient Information')
 
 # Numerical inputs
 age = st.slider('Age (in years)', 18, 100, 50)
@@ -40,7 +40,20 @@ oldpeak = st.slider('Oldpeak (ST depression induced by exercise relative to rest
 
 # Categorical inputs
 sex = st.selectbox('Sex', options=categorical_cols['Sex'])
-chest_pain_type = st.selectbox('Chest Pain Type \n TA: Typical Angina \n ATA: Atypical Angina \n NAP: Non-Anginal Pain \n ASY: Asymptomatic)', options=categorical_cols['ChestPainType'])
+options_list = ['TA', 'ATA', 'NAP', 'ASY']
+
+st.markdown("""
+**Chest Pain Type**  
+TA: Typical Angina  
+ATA: Atypical Angina  
+NAP: Non-Anginal Pain  
+ASY: Asymptomatic
+""")
+
+chest_pain_type = st.selectbox(
+    'Select Type', # Keep the actual selectbox label short and clean
+    options=options_list
+#chest_pain_type = st.selectbox('Chest Pain Type \n TA: Typical Angina \n ATA: Atypical Angina \n NAP: Non-Anginal Pain \n ASY: Asymptomatic)', options=categorical_cols['ChestPainType'])
 resting_ecg = st.selectbox('Resting ECG Results \n Normal: Normal \n ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV) \n LVH: showing probable or definite left ventricular hypertrophy by Estes criteria)', options=categorical_cols['RestingECG'])
 exercise_angina = st.selectbox('Exercise Induced Angina', options=categorical_cols['ExerciseAngina'])
 st_slope = st.selectbox('ST_Slope - the slope of the peak exercise ST segment \n Up: upsloping \n Flat: flat \n Down: downsloping)', options=categorical_cols['ST_Slope'])
