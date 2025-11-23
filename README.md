@@ -14,7 +14,8 @@ The significance of this project lies in addressing heart disease, the principal
 
 Should an individual be predicted to have underlying heart disease, more advanced diagnostics, including both invasive procedures and medical imaging, can then be appropriately performed. Furthermore, this project aims to minimize unnecessary medical interventions for individuals who are not determined to be at risk for cardiac disease.
 
-
+Furthermore, the prediction tool facilitates the early detection of cardiac disease, enabling primary intervention through proactive and personalized care, which can result in reduced costs for both the patient and insurance providers.
+ 
 
 #### Research Question
 Can we predict the likelihood of a person having heart disease based on their personal and medical parameters?
@@ -89,6 +90,8 @@ While this model does a good job of predicting heart disease, additional steps c
   * high-sensitivity C-reactive protein
 - Since Gradient Boosting derived good results, advance methods such as XGBoosting can be used to assess if better scores are available 
 Test the model on external or newer datasets to verify generalizability and robustness across populations.
+- This prediction model can be utilized in conjunction with the "hotspotter" model to facilitate the early identification of "vulnerable patients." This proactive approach will enable the delivery of personalized care, thereby aiming to reduce overall healthcare expenditures for both patients and insurance providers.
+ 
 
 #### Outline of project
 
