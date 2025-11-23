@@ -8,7 +8,8 @@ model = joblib.load('random_forest_model.joblib')
 scaler = joblib.load('scaler.joblib')
 
 # 2. Define categorical and numerical column names used during training
-numerical_cols = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']
+# Corrected numerical_cols to match the columns the scaler was fitted on in the notebook
+numerical_cols = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
 categorical_cols = {
     'Sex': ['F', 'M'],
     'ChestPainType': ['ASY', 'ATA', 'NAP', 'TA'],
@@ -41,40 +42,37 @@ st.markdown(
 )
 
 oldpeak = st.slider(
-    'Enter score here:', 
+    'Enter score here:',
     0.0,
     6.2,
     1.0
 )
-#oldpeak = st.slider('** What is your Oldpeak score (ST depression induced by exercise relative to rest. This can be found on your ECG)', 0.0, 6.2, 1.0)
 
 # Categorical inputs
 sex = st.selectbox('**Select your gender (M = Male / F= Female)**', options=categorical_cols['Sex'])
 
 options_list_chest = ['TA', 'ATA', 'NAP', 'ASY']
 st.markdown("""
-**Chest Pain Type**  
-TA: Typical Angina  
-ATA: Atypical Angina  
-NAP: Non-Anginal Pain  
+**Chest Pain Type**
+TA: Typical Angina
+ATA: Atypical Angina
+NAP: Non-Anginal Pain
 ASY: Asymptomatic
 """)
 chest_pain_type = st.selectbox(
     'Select Type',
     options=options_list_chest)
-#chest_pain_type = st.selectbox('Chest Pain Type \n TA: Typical Angina \n ATA: Atypical Angina \n NAP: Non-Anginal Pain \n ASY: Asymptomatic)', options=categorical_cols['ChestPainType'])
 
 options_list_ecg = ['Normal', 'LVH', 'ST']
 st.markdown("""
-**Resting ECG result**  
-Normal: Normal result  
-ST: Having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)  
-LVH: Showing probable or definite left ventricular hypertrophy by Estes criteria  
+**Resting ECG result**
+Normal: Normal result
+ST: Having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)
+LVH: Showing probable or definite left ventricular hypertrophy by Estes criteria
 """)
 resting_ecg = st.selectbox(
     'Select Type',
     options=options_list_ecg)
-#resting_ecg = st.selectbox('Resting ECG Results \n Normal: Normal \n ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV) \n LVH: showing probable or definite left ventricular hypertrophy by Estes criteria)', options=categorical_cols['RestingECG'])
 exercise_angina = st.selectbox('Exercise Induced Angina', options=categorical_cols['ExerciseAngina'])
 st_slope = st.selectbox('ST_Slope - the slope of the peak exercise ST segment \n Up: upsloping \n Flat: flat \n Down: downsloping)', options=categorical_cols['ST_Slope'])
 
@@ -100,41 +98,44 @@ if st.button('Predict Heart Disease'):
 
     # Apply one-hot encoding to categorical features
     # Create dummy columns for all possible categorical values to ensure consistency
-    for col, categories in categorical_cols.items():
-        for cat in categories:
-            if col != 'Sex' or cat != 'F': # For Sex, 'F' is the reference, so Sex_M is created if Sex is M
-                if col != 'ChestPainType' or cat != 'ASY':
-                    if col != 'RestingECG' or cat != 'LVH':
-                        if col != 'ExerciseAngina' or cat != 'N':
-                            if col != 'ST_Slope' or cat != 'Down':
-                                input_df[f'{col}_{cat}'] = (input_df[col] == cat).astype(int)
+    # The 'drop_first=True' behavior of pd.get_dummies needs to be replicated.
+    # For each categorical column, one category is chosen as the reference (dropped), and others become new columns.
+    # 'Sex': 'F' is the reference (Sex_M is created if Sex is M)
+    # 'ChestPainType': 'ASY' is the reference (ChestPainType_ATA, ChestPainType_NAP, ChestPainType_TA are created)
+    # 'RestingECG': 'LVH' is the reference (RestingECG_Normal, RestingECG_ST are created)
+    # 'ExerciseAngina': 'N' is the reference (ExerciseAngina_Y is created)
+    # 'ST_Slope': 'Down' is the reference (ST_Slope_Flat, ST_Slope_Up are created)
 
-    # For columns where drop_first=True was used during training, we need to handle reference categories explicitly.
-    # 'Sex_M' is created if Sex is 'M'. 'F' is the reference.
     input_df['Sex_M'] = (input_df['Sex'] == 'M').astype(int)
+    input_df['ChestPainType_ATA'] = (input_df['ChestPainType'] == 'ATA').astype(int)
+    input_df['ChestPainType_NAP'] = (input_df['ChestPainType'] == 'NAP').astype(int)
+    input_df['ChestPainType_TA'] = (input_df['ChestPainType'] == 'TA').astype(int)
+    input_df['RestingECG_Normal'] = (input_df['RestingECG'] == 'Normal').astype(int)
+    input_df['RestingECG_ST'] = (input_df['RestingECG'] == 'ST').astype(int)
+    input_df['ExerciseAngina_Y'] = (input_df['ExerciseAngina'] == 'Y').astype(int)
+    input_df['ST_Slope_Flat'] = (input_df['ST_Slope'] == 'Flat').astype(int)
+    input_df['ST_Slope_Up'] = (input_df['ST_Slope'] == 'Up').astype(int)
 
-    # The following categorical columns are dropped after creating their one-hot encoded counterparts.
-    # The specific one-hot encoded columns (e.g., ChestPainType_ATA) correspond to the non-reference categories.
-    # The reference categories (e.g., ASY for ChestPainType) are implicitly handled by the absence of their one-hot column.
+
+    # Drop original categorical columns
     input_df = input_df.drop(columns=list(categorical_cols.keys()))
 
     # Ensure all model_features are present, fill missing one-hot encoded columns with 0
+    # This handles cases where a categorical value was not selected by the user, and thus its one-hot column wasn't created yet.
     for feature in model_features:
         if feature not in input_df.columns:
-            # This primarily handles cases for one-hot encoded columns that were not created
-            # because their corresponding categorical value wasn't selected by the user
-            # e.g., if 'ChestPainType_TA' does not exist, create it and set to 0
             input_df[feature] = 0
 
     # Scale numerical features
+    # Only scale the numerical columns that the scaler was originally fitted on
     input_df[numerical_cols] = scaler.transform(input_df[numerical_cols])
 
     # Reorder columns to match the model's expected input order
     final_input_df = input_df[model_features]
 
     # Make prediction
-    prediction = best_rf_model.predict(final_input_df)
-    prediction_proba = best_rf_model.predict_proba(final_input_df)[:, 1]
+    prediction = model.predict(final_input_df)
+    prediction_proba = model.predict_proba(final_input_df)[:, 1]
 
     st.subheader('Prediction Result:')
     if prediction[0] == 1:
