@@ -22,11 +22,9 @@ categorical_cols = {
 model_features = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak', 'Sex_M', 'ChestPainType_ATA', 'ChestPainType_NAP', 'ChestPainType_TA', 'RestingECG_Normal', 'RestingECG_ST', 'ExerciseAngina_Y', 'ST_Slope_Flat', 'ST_Slope_Up']
 
 # 3. Streamlit App Layout
-st.set_page_config(layout="wide")
-st.set_page_config(page_title="Heart Disease Prediction App", layout='centered')
+st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
 st.title("Heart Disease Prediction")
 st.subheader("Developed by Ananth Sundarrajan")
-st.write("Enter the patient's details to predict the likelihood of heart disease.")
 st.markdown("## Enter the patient's details to predict the likelihood of heart disease.")
 
 # Input fields for user data
