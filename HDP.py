@@ -9,11 +9,12 @@ scaler = joblib.load('scaler.joblib')
 
 # 2. Define categorical and numerical column names used during training
 numerical_cols = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
-categorical_cols_for_dummies = ['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']
+categorical_cols_for_dummies = ['Sex', 'ChestPainType', 'FastingBS', 'RestingECG', 'ExerciseAngina', 'ST_Slope'] # Added FastingBS
 
 # Define the full list of features in the exact order the model expects
 # This needs to match the columns of X_train used for model training
-model_features = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak', 'Sex_M', 'ChestPainType_ATA', 'ChestPainType_NAP', 'ChestPainType_TA', 'RestingECG_Normal', 'RestingECG_ST', 'ExerciseAngina_Y', 'ST_Slope_Flat', 'ST_Slope_Up']
+# Changed 'FastingBS' to 'FastingBS_1'
+model_features = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak', 'FastingBS_1', 'Sex_M', 'ChestPainType_ATA', 'ChestPainType_NAP', 'ChestPainType_TA', 'RestingECG_Normal', 'RestingECG_ST', 'ExerciseAngina_Y', 'ST_Slope_Flat', 'ST_Slope_Up']
 
 # 3. Streamlit App Layout
 st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
@@ -78,7 +79,7 @@ if st.button('Predict Heart Disease'):
         'ChestPainType': chest_pain_type,
         'RestingBP': resting_bp,
         'Cholesterol': cholesterol,
-        'FastingBS': fasting_bs,
+        'FastingBS': fasting_bs, # Now treated as categorical for encoding
         'RestingECG': resting_ecg,
         'MaxHR': max_hr,
         'ExerciseAngina': exercise_angina,
@@ -90,17 +91,13 @@ if st.button('Predict Heart Disease'):
     input_df = pd.DataFrame([input_data])
 
     # Separate numerical and categorical inputs for processing
-    numerical_inputs = input_df[['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']]
+    # FastingBS is removed from numerical_inputs as it's now categorical for one-hot encoding
+    numerical_inputs = input_df[['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']]
     categorical_inputs_to_encode = input_df[categorical_cols_for_dummies]
 
     # One-hot encode categorical inputs, mimicking drop_first=True from training
     # Ensure consistent column names by specifying known categories
-    # For 'Sex', 'F' is the first, so Sex_M is created. ['F', 'M']
-    # For 'ChestPainType', 'ASY' is the first. ['ASY', 'ATA', 'NAP', 'TA']
-    # For 'RestingECG', 'LVH' is the first. ['LVH', 'Normal', 'ST']
-    # For 'ExerciseAngina', 'N' is the first. ['N', 'Y']
-    # For 'ST_Slope', 'Down' is the first. ['Down', 'Flat', 'Up']
-
+    # pd.get_dummies will now correctly handle FastingBS as well.
     encoded_categorical_inputs = pd.get_dummies(categorical_inputs_to_encode,
                                                 columns=categorical_cols_for_dummies,
                                                 drop_first=True)
