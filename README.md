@@ -66,6 +66,17 @@ Using the CRISP-DM Methodology, the predictive model uses the below methods:
 - The correlation matrix of numerical features (visualized using a heatmap), indicates:
   * 'Age' and 'MaxHR' have a moderate negative correlation (Logical as age increases, the person's maxHR will decrease)
   * 'RestingBP' and 'Oldpeak' have weak positive correlations
+- Data Pre-Processing
+  * One-Hot Encoding: Categorical features like 'Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', and 'ST_Slope' are converted into a numerical format using pd.get_dummies.
+  * Standard Scaling: Numerical features such as 'Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', and 'Oldpeak' are normalized using StandardScaler from sklearn.preprocessing.
+  * Data Splitting: The dataset is divided into features (X) and target (y) using standard pandas operations, and then further split into training and testing sets using train_test_split from sklearn.model_selection.
+- Evaluation Metrics
+  * The model's performance is assessed using F1-Score. A high F1-score indicates that the model has good performance in both identifying actual heart disease cases (high recall) and making accurate positive predictions (high precision). This balance is often desirable in medical applications where both false positives and false negatives have significant costs.
+- Model Training
+  * Both "Random Forest" and "Stacking Classifier" have relatively equal scores with a "high f1-score" score of 0.8920
+  * But given Random Forest has lesser computation complication compared to Stacking classifier - needs to compute 5 methods and then run Logistic Regression on the result leading to a total of 6 methods - **Random Forest would be a better model for this data set.**
+- Front-end Interface
+  * [Front-end interface]() created using Streamlit and hosted on Streamlit community
 
 
 #### Next steps
