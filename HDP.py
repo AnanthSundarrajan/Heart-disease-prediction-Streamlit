@@ -7,13 +7,13 @@ import numpy as np
 model = joblib.load('random_forest_model.joblib')
 scaler = joblib.load('scaler.joblib')
 
-# 2. Define categorical and numerical column names used during training
+# 2. Define column names used during training
 numerical_cols = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
-categorical_cols_for_dummies = ['Sex', 'ChestPainType', 'FastingBS', 'RestingECG', 'ExerciseAngina', 'ST_Slope'] # Added FastingBS
+# FastingBS is treated as categorical for one-hot encoding as per notebook
+categorical_cols_for_dummies = ['Sex', 'ChestPainType', 'FastingBS', 'RestingECG', 'ExerciseAngina', 'ST_Slope']
 
 # Define the full list of features in the exact order the model expects
-# This needs to match the columns of X_train used for model training
-# Changed 'FastingBS' to 'FastingBS_1'
+# This order is crucial.
 model_features = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak', 'FastingBS_1', 'Sex_M', 'ChestPainType_ATA', 'ChestPainType_NAP', 'ChestPainType_TA', 'RestingECG_Normal', 'RestingECG_ST', 'ExerciseAngina_Y', 'ST_Slope_Flat', 'ST_Slope_Up']
 
 # 3. Streamlit App Layout
@@ -90,32 +90,23 @@ if st.button('Predict Heart Disease'):
     # Create a DataFrame from the input data
     input_df = pd.DataFrame([input_data])
 
-    # Separate numerical and categorical inputs for processing
-    # FastingBS is removed from numerical_inputs as it's now categorical for one-hot encoding
-    numerical_inputs = input_df[['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']]
-    categorical_inputs_to_encode = input_df[categorical_cols_for_dummies]
+    # One-hot encode all categorical inputs, including FastingBS
+    # This will create columns like 'Sex_M', 'ChestPainType_ATA', 'FastingBS_1', etc.
+    processed_df = pd.get_dummies(input_df, columns=categorical_cols_for_dummies, drop_first=True)
 
-    # One-hot encode categorical inputs, mimicking drop_first=True from training
-    # Ensure consistent column names by specifying known categories
-    # pd.get_dummies will now correctly handle FastingBS as well.
-    encoded_categorical_inputs = pd.get_dummies(categorical_inputs_to_encode,
-                                                columns=categorical_cols_for_dummies,
-                                                drop_first=True)
+    # Ensure all model_features are present in processed_df, fill missing with 0
+    # This handles cases where a particular one-hot encoded column (e.g., ChestPainType_TA)
+    # was not generated because the user didn't select that option.
+    for feature in model_features:
+        if feature not in processed_df.columns:
+            processed_df[feature] = 0
 
-    # Combine all features before scaling
-    processed_input_df = pd.concat([numerical_inputs, encoded_categorical_inputs], axis=1)
+    # Apply scaling to the numerical columns only
+    # Ensure numerical_cols exist before scaling (they should from input_data)
+    processed_df[numerical_cols] = scaler.transform(processed_df[numerical_cols])
 
-    # Scale the numerical features that were scaled during training
-    processed_input_df[numerical_cols] = scaler.transform(processed_input_df[numerical_cols])
-
-    # Create a final DataFrame with all model features, initialized to 0
-    final_input_df = pd.DataFrame(0, index=[0], columns=model_features)
-
-    # Fill in the values from the processed_input_df into the final_input_df
-    # This ensures correct column names, order, and handles any missing dummy columns (sets them to 0)
-    for col in processed_input_df.columns:
-        if col in final_input_df.columns:
-            final_input_df[col] = processed_input_df[col].values # Use .values to avoid potential index alignment issues
+    # Reorder columns to match the model's expected input order
+    final_input_df = processed_df[model_features]
 
     # Make prediction
     prediction = model.predict(final_input_df)
