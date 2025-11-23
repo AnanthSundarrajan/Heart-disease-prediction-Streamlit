@@ -90,7 +90,7 @@ While this model does a good job of predicting heart disease, additional steps c
   * high-sensitivity C-reactive protein
 - Since Gradient Boosting derived good results, advance methods such as XGBoosting can be used to assess if better scores are available 
 Test the model on external or newer datasets to verify generalizability and robustness across populations.
-- This prediction model can be utilized in conjunction with the "hotspotter" model to facilitate the early identification of "vulnerable patients." This proactive approach will enable the delivery of personalized care, thereby aiming to reduce overall healthcare expenditures for both patients and insurance providers.
+- This prediction model can be utilized in conjunction with the "hotspotter" model to facilitate the early identification of "at-risk patients." This proactive approach will enable the delivery of personalized care, thereby aiming to reduce overall healthcare expenditures for both patients and insurance providers.
  
 
 #### Outline of project
