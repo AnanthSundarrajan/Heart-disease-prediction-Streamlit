@@ -11,8 +11,16 @@ X_train_columns = joblib.load('X_train_columns.joblib')
 
 # Title of the Streamlit application
 st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
-st.title("Heart Disease Prediction")
-st.subheader("Developed by Ananth Sundarrajan")
+st.markdown(
+    "<h1 style='text-align: center;'>Heart Disease Prediction</h1>",
+    unsafe_allow_html=True
+)
+st.markdown(
+    "<h2 style='text-align: center;'>Developed by Ananth Sundarrajan</h2>",
+    unsafe_allow_html=True
+)
+#st.title("Heart Disease Prediction")
+#st.subheader("Developed by Ananth Sundarrajan")
 st.markdown("### Enter your details on the left and click 'Predict Heart Disease' to predict the likelihood of heart disease.")
 st.markdown("""
 **Pro-tip:** You can manually resize the sidebar by hovering your mouse cursor over the right edge of the sidebar until the cursor changes to a double-headed arrow, and then dragging the edge.
