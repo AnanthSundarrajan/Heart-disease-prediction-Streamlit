@@ -46,7 +46,7 @@ Using the CRISP-DM Methodology, the predictive model uses the below methods:
   * The DataFrame df comprises 918 entries and 12 columns
   * There are no missing entries
   * There are no duplicates
-  * The Data types are distributed among 6 int64 columns (Age, RestingBP, Cholesterol, FastingBS, MaxHR, HeartDisease), 5 object columns (Sex, ChestPainType, RestingECG, ExerciseAngina, ST_Slope), and 1 float64 column (Oldpeak).
+  * The Data types are distributed among 6 Inteeger (int64) columns (Age, RestingBP, Cholesterol, FastingBS, MaxHR, HeartDisease), 5 object columns (Sex, ChestPainType, RestingECG, ExerciseAngina, ST_Slope), and 1 decimal (float64) column (Oldpeak).
   * Based on the outlier analysis of the features, the following observations were made regarding outliers:
     - Age: No significant outliers were detected.
     - RestingBP: 28 outliers were identified, with values falling below 90 or exceeding 170.
