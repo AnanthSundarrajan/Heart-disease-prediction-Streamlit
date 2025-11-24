@@ -98,7 +98,7 @@ Test the model on external or newer datasets to verify generalizability and robu
 
 - [Link to front end application](https://heart-disease-prediction-app-pr.streamlit.app/)
 - [Link to jupyter notebook](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/HDP_Final.ipynb)
-- [Link to project report]()
+- [Link to project report](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/Ananth_report.pdf)
 - [Link to dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
 - Streamlit files
   * [Link to .py file](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/HDP.py)
