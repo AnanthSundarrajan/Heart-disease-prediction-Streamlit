@@ -53,11 +53,13 @@ Using the CRISP-DM Methodology, the predictive model uses the below methods:
     - Cholesterol: 183 outliers were found, corresponding to values below 32 or above 407.
     - MaxHR: 2 outliers were noted, with values below 66 or above 210.
     - Oldpeak: 16 were identified, with values below -2.25 or above 3.75.
-    - Next Steps: Given that the objective is to determine the probability of heart diseases, it is expected that some patients in advanced stages of the condition will exhibit elevated values for Resting Blood Pressure (RestingBP), Cholesterol, and Oldpeak. **While these values may appear to be statistical outliers, they constitute valid recordings within the context of the problem statement and, consequently, should not be removed from the dataset.**
+    - **Next Steps**: Given that the objective is to determine the probability of heart diseases, it is expected that some patients in advanced stages of the condition will exhibit elevated values for Resting Blood Pressure (RestingBP), Cholesterol, and Oldpeak. **While these values may appear to be statistical outliers, they constitute valid recordings within the context of the problem statement and, consequently, should not be removed from the dataset.**
 - Numerical feature distributions (visualized using histograms with KDEs), show varying patterns:
   * 'Age' and 'RestingBP' appear somewhat normally distributed
-  * 'Cholesterol' shows a bimodal-like distribution with a significant number of zero values
-  * 'Oldpeak' has a notable peak at zero.
+  * 'Cholesterol' shows a bimodal-like distribution with a 172 entries of zero values
+    - **Next Steps**: Since "Cholestrol" equal to "Zero" is incorrect, **remove the entries that have value as "Zero".**
+    - **The new dataframe now contains 746 entires.** 
+  * 'Oldpeak' has a notable peak at zero. This is normal as people with no heart disease tend to have "Zero" as Oldpeak.
   * 'MaxHR' shows a bell curve.
 - Plots for categorical features show
   * Data set has more information about Male than Female that could lead to some bias in the prediction
@@ -73,8 +75,8 @@ Using the CRISP-DM Methodology, the predictive model uses the below methods:
 - Evaluation Metrics
   * The model's performance is assessed using F1-Score. A high F1-score indicates that the model has good performance in both identifying actual heart disease cases (high recall) and making accurate positive predictions (high precision). This balance is often desirable in medical applications where both false positives and false negatives have significant costs.
 - Model Training
-  * Both "Random Forest" and "Stacking Classifier" have relatively equal scores with a "high f1-score" score of 0.8920
-  * But given Random Forest has lesser computation complication compared to Stacking classifier - needs to compute 5 methods and then run Logistic Regression on the result leading to a total of 6 methods - **Random Forest would be a better model for this data set.**
+  * **The "Random Forest" model** achieved the highest F1-score of 0.9221. Consequently, "Random Forest" will be utilized as the default method for predictions.
+  * The model's consistently high performance across all other metrics further validates its suitability as an effective algorithm for this predictive machine learning model.
 - Front-end Interface
   * [Front-end interface]() created using Streamlit and hosted on Streamlit community
 
