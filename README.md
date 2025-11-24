@@ -12,7 +12,7 @@ Based on the analysis, a user facing application was built using “Streamlit”
 #### Rationale
 The significance of this project lies in addressing heart disease, the principal cause of mortality globally. Unlike acute trauma, such as bone fractures or contusions, heart disease progresses slowly and is often referred to as the "Silent Killer." Optimal management necessitates early detection and intervention. Current direct diagnostic methods, such as angiograms, are both costly and subject patients to potentially unnecessary radiation exposure. This project proposes utilizing non-invasive measures, specifically a person's biometric markers and preliminary tests, including Electrocardiogram (ECG) results, fasting blood sugar levels, and reported chest pain, to predict the probability of underlying heart disease.
 
-Should an individual be predicted to have underlying heart disease, more advanced diagnostics, including both invasive procedures and medical imaging, can then be appropriately performed. Furthermore, this project aims to minimize unnecessary medical interventions for individuals who are not determined to be at risk for cardiac disease.
+Should an individual be predicted to have underlying heart disease, more advanced diagnostics, including both invasive procedures and medical imaging, can then be appropriately performed. This project aims to minimize unnecessary medical interventions for individuals who are not determined to be at risk for cardiac disease.
 
 Furthermore, the prediction tool facilitates the early detection of cardiac disease, enabling primary intervention through proactive and personalized care, which can result in reduced costs for both the patient and insurance providers.
  
@@ -96,7 +96,7 @@ Test the model on external or newer datasets to verify generalizability and robu
 
 #### Outline of project
 
-- [Link to front end application]()
+- [Link to front end application](https://heart-disease-prediction-app-pr.streamlit.app/)
 - [Streamlit - Link to .py file]()
 - [Streamlit - Link to requirements file]()
 - [Link to jupyter notebook]()
