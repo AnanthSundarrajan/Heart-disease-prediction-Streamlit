@@ -78,7 +78,7 @@ Using the CRISP-DM Methodology, the predictive model uses the below methods:
   * **The "Random Forest" model** achieved the highest F1-score of 0.9221. Consequently, "Random Forest" will be utilized as the default method for predictions.
   * The model's consistently high performance across all other metrics further validates its suitability as an effective algorithm for this predictive machine learning model.
 - Front-end Interface
-  * [Front-end interface]() created using Streamlit and hosted on Streamlit community
+  * [Front-end interface](https://heart-disease-prediction-app-pd.streamlit.app/) created using Streamlit and hosted on Streamlit community
 
 
 #### Next steps
@@ -98,16 +98,11 @@ Test the model on external or newer datasets to verify generalizability and robu
 
 #### Outline of project
 
-- [Link to front end application](https://heart-disease-prediction-app-pr.streamlit.app/)
+- [Link to front end application](https://heart-disease-prediction-app-pd.streamlit.app/)
 - [Link to jupyter notebook](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/HDP_Final.ipynb)
 - [Link to project report](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/Ananth_report_final.pdf)
 - [Link to dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
-- Streamlit files
-  * [Link to .py file](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/HDP.py)
-  * [Link to X_Train_Columns](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/X_train_columns.joblib)
-  * [Link to Best RF Model](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/best_rf_model.joblib)
-  * [Link to Requirements.txt](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/requirements.txt)
-  * [Link to Scaler](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/scaler.joblib)
+- [Link to Streamlit files](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/tree/main/streamlit_app)
  
 #### Contact and Further Information
 - For technical implementation details or model deployment guidance, please take a look at the complete analysis in the Jupyter Notebook.
