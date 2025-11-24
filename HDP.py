@@ -51,7 +51,7 @@ oldpeak = st.sidebar.slider(
     1.0,
     step=0.1
 )
-#oldpeak = st.sidebar.slider("What is your Oldpeak score?**  \nThis is the ST depression induced by exercise relative to rest which can be found on your ECG", 0.0, 6.2, 1.0, step=0.1)
+
 st_slope = st.sidebar.selectbox("**What was the slot of ST on your ECG?**", ("Upsloping (Up)", "Flat", "Downsloping (Down)"))
 
 
