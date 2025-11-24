@@ -13,7 +13,8 @@ X_train_columns = joblib.load('X_train_columns.joblib')
 st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
 st.title("Heart Disease Prediction")
 st.subheader("Developed by Ananth Sundarrajan")
-st.markdown("### Enter the patient's details to predict the likelihood of heart disease.")
+st.markdown("### Enter the patient's details on the left and click 'Predict Heart Disease' to predict the likelihood of heart disease.")
+st.markdown("#### You can manually resize the sidebar by hovering your mouse cursor over the right edge of the sidebar until the cursor changes to a double-headed arrow, and then dragging the edge ")
 
 # Input widgets for the 11 features
 st.sidebar.header("**Enter your Information**")
@@ -30,7 +31,7 @@ exercise_angina = st.sidebar.radio("Do you have 'Exercise Induced Angina'?", ("N
 st.sidebar.markdown("**What is your Oldpeak score?**  \nThis is the ST depression induced by exercise relative to rest which can be found on your ECG")
 
 oldpeak = st.sidebar.slider(
-    "Enter the score below:",
+    "Use the slider to select your score:",
     0.0,
     6.2,
     1.0,
