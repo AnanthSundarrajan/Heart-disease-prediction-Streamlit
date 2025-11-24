@@ -5,17 +5,16 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 # Load the trained model, scaler, and feature columns
-try:
-    best_rf_model = joblib.load('best_rf_model.joblib')
-    scaler = joblib.load('scaler.joblib')
-    X_train_columns = joblib.load('X_train_columns.joblib')
-except FileNotFoundError:
-    st.error("Error: Model files not found. Please ensure 'best_rf_model.joblib', 'scaler.joblib', and 'X_train_columns.joblib' are in the root directory.")
-    st.stop()
+best_rf_model = joblib.load('best_rf_model.joblib')
+scaler = joblib.load('scaler.joblib')
+X_train_columns = joblib.load('X_train_columns.joblib')
+
 
 # Title of the Streamlit application
-st.title("Heart Disease Prediction Application")
-st.write("Enter the patient's details to predict the likelihood of heart disease.")
+st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
+st.title("Heart Disease Prediction")
+st.subheader("Developed by Ananth Sundarrajan")
+st.markdown("### Enter the patient's details to predict the likelihood of heart disease."))
 
 # Input widgets for the 11 features
 st.sidebar.header("Patient Information")
