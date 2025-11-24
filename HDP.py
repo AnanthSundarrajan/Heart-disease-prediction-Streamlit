@@ -14,7 +14,7 @@ X_train_columns = joblib.load('X_train_columns.joblib')
 st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
 st.title("Heart Disease Prediction")
 st.subheader("Developed by Ananth Sundarrajan")
-st.markdown("### Enter the patient's details to predict the likelihood of heart disease."))
+st.markdown("### Enter the patient's details to predict the likelihood of heart disease.")
 
 # Input widgets for the 11 features
 st.sidebar.header("Patient Information")
