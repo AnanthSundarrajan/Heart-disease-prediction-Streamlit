@@ -16,11 +16,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.markdown(
-    "<h2 style='text-align: center;'>Developed by Ananth Sundarrajan</h2>",
+    "<h3 style='text-align: center;'>Developed by Ananth Sundarrajan</h3>",
     unsafe_allow_html=True
 )
-#st.title("Heart Disease Prediction")
-#st.subheader("Developed by Ananth Sundarrajan")
+
 st.markdown("### Enter your details on the left and click 'Predict Heart Disease' to predict the likelihood of heart disease.")
 st.markdown("""
 **Pro-tip:** You can manually resize the sidebar by hovering your mouse cursor over the right edge of the sidebar until the cursor changes to a double-headed arrow, and then dragging the edge.
