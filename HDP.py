@@ -9,32 +9,40 @@ best_rf_model = joblib.load('best_rf_model.joblib')
 scaler = joblib.load('scaler.joblib')
 X_train_columns = joblib.load('X_train_columns.joblib')
 
-
 # Title of the Streamlit application
 st.set_page_config(page_title="Heart Disease Prediction App", layout='wide')
 st.title("Heart Disease Prediction")
 st.subheader("Developed by Ananth Sundarrajan")
-st.markdown("### Enter the patient's details to predict the likelihood of heart disease.")
+st.markdown("### Enter the patient's details to predict the likelihood of heart disease."
 
 # Input widgets for the 11 features
-st.sidebar.header("Patient Information")
+st.sidebar.header("**Enter your Information**")
 
-age = st.sidebar.slider("**What is your Age (in years)**", 20, 80, 50)
-sex = st.sidebar.radio("Sex", ("Male", "Female"))
-chest_pain_type = st.sidebar.selectbox("Chest Pain Type", ("Typical Angina (TA)", "Atypical Angina (ATA)", "Non-Anginal Pain (NAP)", "Asymptomatic (ASY)"))
-resting_bp = st.sidebar.slider("**What is your Resting Systolic Blood Pressure in mmHg**", 80, 200, 120)
+age = st.sidebar.slider("**What is your Age (in years)?**", 20, 80, 50)
+sex = st.sidebar.radio("**Select your gender?**", ("Male", "Female"))
+chest_pain_type = st.sidebar.selectbox("**What type of 'Chest Pain' do you have?**", ("Typical Angina (TA)", "Atypical Angina (ATA)", "Non-Anginal Pain (NAP)", "Asymptomatic (ASY) or No Chest Pain"))
+resting_bp = st.sidebar.slider("**What is your 'Resting Systolic Blood Pressure' in mmHg?**", 80, 200, 120)
 cholesterol = st.sidebar.slider("**What is your cholesterol level in mg/dl**", 0, 600, 200)
-fasting_bs = st.sidebar.radio("**Was your 'Fasting Blood Sugar' GREATER THAN 120 mg/dl**", ("No", "Yes"))
-resting_ecg = st.sidebar.selectbox("Resting Electrocardiogram", ("Normal", "ST-T Wave Abnormality (ST)", "Left Ventricular Hypertrophy (LVH)"))
-max_hr = st.sidebar.slider("**What is the 'Maximum Heart Rate' Achieved**", 60, 202, 150)
-exercise_angina = st.sidebar.radio("Exercise Induced Angina", ("No", "Yes"))
-oldpeak = st.sidebar.slider("Oldpeak (ST depression induced by exercise relative to rest)", 0.0, 6.2, 1.0, step=0.1)
-st_slope = st.sidebar.selectbox("ST Slope", ("Upsloping (Up)", "Flat", "Downsloping (Down)"))
+fasting_bs = st.sidebar.radio("**Was your 'Fasting Blood Sugar' GREATER THAN 120 mg/dl?**", ("No", "Yes"))
+resting_ecg = st.sidebar.selectbox("What was your 'Resting Electrocardiogram' result?", ("Normal", "ST-T Wave Abnormality (ST)", "Left Ventricular Hypertrophy (LVH)"))
+max_hr = st.sidebar.slider("**What is the 'Maximum Heart Rate' achieved?**", 60, 202, 150)
+exercise_angina = st.sidebar.radio("Do you have 'Exercise Induced Angina'?", ("No", "Yes"))
+st.sidebar.markdown("**What is your Oldpeak score?**  \nThis is the ST depression induced by exercise relative to rest which can be found on your ECG")
+
+oldpeak = st.sidebar.slider(
+    "Enter the score below:",
+    0.0,
+    6.2,
+    1.0,
+    step=0.1
+)
+#oldpeak = st.sidebar.slider("What is your Oldpeak score?**  \nThis is the ST depression induced by exercise relative to rest which can be found on your ECG", 0.0, 6.2, 1.0, step=0.1)
+st_slope = st.sidebar.selectbox("**What was the slot of ST on your ECG?**", ("Upsloping (Up)", "Flat", "Downsloping (Down)"))
 
 
 # Convert categorical inputs to model-compatible format
 sex_map = {"Male": "M", "Female": "F"}
-chest_pain_type_map = {"Typical Angina (TA)": "TA", "Atypical Angina (ATA)": "ATA", "Non-Anginal Pain (NAP)": "NAP", "Asymptomatic (ASY)": "ASY"}
+chest_pain_type_map = {"Typical Angina (TA)": "TA", "Atypical Angina (ATA)": "ATA", "Non-Anginal Pain (NAP)": "NAP", "Asymptomatic (ASY) or No Chest Pain": "ASY"}
 fasting_bs_map = {"No": 0, "Yes": 1}
 resting_ecg_map = {"Normal": "Normal", "ST-T Wave Abnormality (ST)": "ST", "Left Ventricular Hypertrophy (LVH)": "LVH"}
 exercise_angina_map = {"No": "N", "Yes": "Y"}
