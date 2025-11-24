@@ -21,7 +21,7 @@ Furthermore, the prediction tool facilitates the early detection of cardiac dise
 Can we predict the likelihood of a person having heart disease based on their personal and medical parameters?
 
 #### Data Sources
-[Heart Failure Prediction Dataset from Kaggle] (https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
+[Heart Failure Prediction Dataset from Kaggle](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
 
 #### Methodology
 Using the CRISP-DM Methodology, the predictive model uses the below methods:
@@ -97,12 +97,16 @@ Test the model on external or newer datasets to verify generalizability and robu
 #### Outline of project
 
 - [Link to front end application](https://heart-disease-prediction-app-pr.streamlit.app/)
-- [Streamlit - Link to .py file]()
-- [Streamlit - Link to requirements file]()
-- [Link to jupyter notebook]()
+- [Link to jupyter notebook](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/HDP_Final.ipynb)
 - [Link to project report]()
-- [Link to dataset]()
-
+- [Link to dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
+- Streamlit files
+  * [Link to .py file](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/HDP.py)
+  * [Link to X_Train_Columns](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/X_train_columns.joblib)
+  * [Link to Best RF Model](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/best_rf_model.joblib)
+  * [Link to Requirements.txt](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/requirements.txt)
+  * [Link to Scaler](https://github.com/AnanthSundarrajan/Heart-disease-prediction-Streamlit/blob/main/scaler.joblib)
+ 
 #### Contact and Further Information
 - For technical implementation details or model deployment guidance, please take a look at the complete analysis in the Jupyter Notebook.
 - Author: Ananth Sundarrajan
